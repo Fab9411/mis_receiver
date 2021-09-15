@@ -33,8 +33,11 @@ class Constants(BaseConstants):
     num_rounds = 10
     fake_df = pd.read_csv("mis_receiver/data/fake_df.csv")
     true_df = pd.read_csv("mis_receiver/data/true_df.csv")
-    news_title = fake_df.loc[:,'title']
-    news_text = fake_df.loc[:,'text']
+    news_title_fake = fake_df.loc[:,'title']
+    news_title_true = true_df.loc[:,'title']
+    news_text_fake = fake_df.loc[:,'text']
+    news_text_true = true_df.loc[:,'text']
+
 
 
 class Subsession(BaseSubsession):
@@ -47,4 +50,4 @@ class Group(BaseGroup):
 
 class Player(BasePlayer):
     age = models.IntegerField(choices = range(18, 99, 1))
-    Q1 = models.CharField()
+    choices = models.CharField()

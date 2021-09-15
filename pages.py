@@ -15,14 +15,11 @@ class ResultsWaitPage(WaitPage):
 
 class Questions(Page):
     form_model = 'player'
-    form_fields = ['Q1']
-
-    def after_all_players_arrive(self):
-        self.group.subsession.create_question()
+    form_fields = ['choices']
 
     def vars_for_template(self):
-        news_title = str(Constants.news_title[self.round_number]),
-        news_text = str(Constants.news_text[self.round_number]),
+        news_title = str(Constants.news_title_fake[self.round_number]),
+        news_text = str(Constants.news_text_fake[self.round_number]),
         source = 'Corriere'
         return{
         'news_title': news_title,
@@ -43,5 +40,8 @@ class Check_Anagraphics(Page):
             'your_age': self.player.age
         }
 
+class Results(Page):
+    def is_displayed(self):
+        return self.round_number == 10
 
-page_sequence = [Anagraphics, Check_Anagraphics, Questions, ResultsWaitPage]
+page_sequence = [Anagraphics, Check_Anagraphics, Questions, ResultsWaitPage, Results]
