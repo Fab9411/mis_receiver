@@ -31,18 +31,26 @@ class Constants(BaseConstants):
     name_in_url = 'mis_receiver'
     players_per_group = None
     num_rounds = 10
+    n_tot_news = num_rounds         # how many news we want to use -> default: equal to n of rounds
+    perc_fake = 0.5                 # percentage of fake news we want in our df
+    perc_true = 1 - perc_fake       # percentage of reliable news we want in our df
     fake_df = pd.read_csv("mis_receiver/data/fake_df.csv")
+    fake_df['type'] = 'fake'
     true_df = pd.read_csv("mis_receiver/data/true_df.csv")
-    news_title_fake = fake_df.loc[:,'title']
-    news_title_true = true_df.loc[:,'title']
-    news_text_fake = fake_df.loc[:,'text']
-    news_text_true = true_df.loc[:,'text']
+    true_df['type'] = 'reliable'
+    
+    # the dataset of news is built by randomly picking the chosen percentage of fake and reliable news
+    # from the two dataset. Fixing the random state, the list is consistent from one implementation
+    # of the experiment to the other. We also randomize (with fixed seed) the order and reset the index
+    news_df = pd.concat([fake_df.sample(n = int(n_tot_news*perc_fake), random_state = 1234), 
+                         true_df.sample(n = int(n_tot_news*perc_true), random_state= 1234)]).sample(frac = 1, random_state = 1234).reset_index(drop = True)
 
 
 
 class Subsession(BaseSubsession):
-    pass
-
+    news_title = models.CharField()
+    news_text = models.CharField()
+    news_source = models.CharField()
 
 class Group(BaseGroup):
     pass

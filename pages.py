@@ -1,6 +1,7 @@
 from otree.api import Currency as c, currency_range
 from ._builtin import Page, WaitPage
 from .models import Constants, Subsession
+from mis_receiver import models
 
 
 class Anagraphics (Page):
@@ -18,13 +19,12 @@ class Questions(Page):
     form_fields = ['choices']
 
     def vars_for_template(self):
-        news_title = str(Constants.news_title_fake[self.round_number]),
-        news_text = str(Constants.news_text_fake[self.round_number]),
-        source = 'Corriere'
+        # selecting the row of the news_df that corresponds to the current round
+        row = Constants.news_df.iloc[self.round_number - 1, :]
         return{
-        'news_title': news_title,
-        'news_text': news_text,
-        'source': source,
+        'news_title': row['title'],
+        'news_text': row['text'],
+        'source': row['type'],
         'round_number':self.round_number,
         }
     
