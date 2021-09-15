@@ -38,14 +38,7 @@ class Constants(BaseConstants):
 
 
 class Subsession(BaseSubsession):
-    news_title = models.StringField()
-    news_text = models.StringField()
-    source = models.StringField()
-
-    def create_question(self):
-        round = 1
-        news_title = pd.read_csv("mis_receiver/data/fake_df.csv").loc[round,'title']
-        return self.question == news_title
+    pass
 
 
 class Group(BaseGroup):
