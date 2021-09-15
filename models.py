@@ -35,9 +35,9 @@ class Constants(BaseConstants):
     perc_fake = 0.5                 # percentage of fake news we want in our df
     perc_true = 1 - perc_fake       # percentage of reliable news we want in our df
     fake_df = pd.read_csv("mis_receiver/data/fake_df.csv")
-    fake_df['type'] = 'fake'
+    fake_df['type'] = 'Fake'
     true_df = pd.read_csv("mis_receiver/data/true_df.csv")
-    true_df['type'] = 'reliable'
+    true_df['type'] = 'Reliable'
     
     # the dataset of news is built by randomly picking the chosen percentage of fake and reliable news
     # from the two dataset. Fixing the random state, the list is consistent from one implementation
@@ -50,7 +50,11 @@ class Constants(BaseConstants):
 class Subsession(BaseSubsession):
     news_title = models.CharField()
     news_text = models.CharField()
-    news_source = models.CharField()
+    news_type = models.CharField()
+
+    def set_payoffs(self):
+        players = self.get_players()
+        choices_l = [p.choices for p in players]
 
 class Group(BaseGroup):
     pass
