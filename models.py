@@ -52,9 +52,7 @@ class Subsession(BaseSubsession):
     news_text = models.CharField()
     news_type = models.CharField()
 
-    def set_payoffs(self):
-        players = self.get_players()
-        choices_l = [p.choices for p in players]
+
 
 class Group(BaseGroup):
     pass
@@ -63,3 +61,4 @@ class Group(BaseGroup):
 class Player(BasePlayer):
     age = models.IntegerField(choices = range(18, 99, 1))
     choices = models.CharField()
+    payoff_final = models.CurrencyField()
