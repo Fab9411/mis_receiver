@@ -30,15 +30,22 @@ In the three treatments, the two types of sources will differ in their publishin
 class Constants(BaseConstants):
     name_in_url = 'mis_receiver'
     players_per_group = None
-    num_rounds = 1
+    num_rounds = 10
     fake_df = pd.read_csv("mis_receiver/data/fake_df.csv")
     true_df = pd.read_csv("mis_receiver/data/true_df.csv")
-    q1_title = fake_df.iloc[0,0]
-    q1_text = fake_df.iloc[0,1]
+    news_title = fake_df.loc[:,'title']
+    news_text = fake_df.loc[:,'text']
 
 
 class Subsession(BaseSubsession):
-    pass
+    news_title = models.StringField()
+    news_text = models.StringField()
+    source = models.StringField()
+
+    def create_question(self):
+        round = 1
+        news_title = pd.read_csv("mis_receiver/data/fake_df.csv").loc[round,'title']
+        return self.question == news_title
 
 
 class Group(BaseGroup):

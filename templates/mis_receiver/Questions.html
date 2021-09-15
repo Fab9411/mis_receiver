@@ -2,14 +2,18 @@
 {% load otree static %}
 
 {% block title %}
-    Question
+    Question {{ player.round_number }}
 {% endblock %}
 
 {% block content %}
 
-<strong>{{ Constants.q1_title }}</strong>
+<strong>
+    {{ news_title }}
+</strong>
 
-<p>{{ Constants.q1_text }}</p>
+<p>
+    {{ news_text }}
+</p>
 
 <p>
     This news is:
