@@ -16,6 +16,13 @@
 </p>
 
 
+{% if session.config.source %} <!-- Show source only if source is active in session config -->
+    <strong>
+        {{ source }}
+    </strong>
+{% endif %}
+
+
 <p>
     This news is:
     <button name = 'choices' value = "Fake" class = 'btn btn-outline-primary' btn-lg> Fake </button>

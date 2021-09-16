@@ -32,11 +32,13 @@ class Questions(Page):
         self.subsession.news_title = row['title']
         self.subsession.news_text = row['text']
         self.subsession.news_type = row['type']
+        self.subsession.source = row['source']
         
         return{
         'news_title': row['title'],
         'news_text': row['text'],
-        'source': row['type'],
+        'type': row['type'],
+        'source': row['source'],
         'round_number':self.round_number,
         }
 
