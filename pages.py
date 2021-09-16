@@ -48,6 +48,9 @@ class Results(Page):
     To be done:
         - include debunking treatment and make this page dependent on it
     """
+
+    def is_displayed(self):
+        return self.session.config['debunking'] == True 
     
     
     def vars_for_template(self):
