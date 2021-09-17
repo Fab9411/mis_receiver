@@ -81,6 +81,6 @@ class Results(Page):
 
 class Final_Results(Page):
     def is_displayed(self):
-        return self.round_number == 10
+        return self.round_number == Constants.num_rounds
     
 page_sequence = [Anagraphics, Check_Anagraphics, Questions, Results, Final_Results]
