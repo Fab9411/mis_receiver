@@ -8,8 +8,16 @@ class Anagraphics (Page):
     form_model = 'player'
     form_fields = ['age']
 
+
     def is_displayed(self):
         return self.round_number == 1
+
+    def vars_for_template(self):
+        # I call the setting_sources method for setting the source-type link according to the treatment
+        Constants.setting_sources(self, Constants.news_df)
+        return{
+        'treatment': self.session.config['treatment']
+        }
 
 class Check_Anagraphics(Page):
 
@@ -25,8 +33,12 @@ class Questions(Page):
     form_model = 'player'
     form_fields = ['choices']
 
+    
 
     def vars_for_template(self):
+        
+
+
         # selecting the row of the news_df that corresponds to the current round
         row = Constants.news_df.iloc[self.round_number - 1, :]
         self.subsession.news_title = row['title']

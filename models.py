@@ -36,18 +36,43 @@ class Constants(BaseConstants):
     perc_true = 1 - perc_fake       # percentage of reliable news we want in our df
     fake_df = pd.read_csv("mis_receiver/data/fake_df.csv")
     fake_df['type'] = 'Fake'
-    fake_df['source'] = 'Source A'
     true_df = pd.read_csv("mis_receiver/data/true_df.csv")
     true_df['type'] = 'Reliable'
-    true_df['source'] = 'Source B'
-    
     # the dataset of news is built by randomly picking the chosen percentage of fake and reliable news
     # from the two dataset. Fixing the random state, the list is consistent from one implementation
     # of the experiment to the other. We also randomize (with fixed seed) the order and reset the index
     news_df = pd.concat([fake_df.sample(n = int(n_tot_news*perc_fake), random_state = 1234), 
                          true_df.sample(n = int(n_tot_news*perc_true), random_state= 1234)]).sample(frac = 1, random_state = 1234).reset_index(drop = True)
+    news_df['source'] = ''
 
+    def setting_sources(self, df):
+        treatment = self.session.config['treatment']
+        # setting different percentage according to treatment
+        if  treatment == 'T1':
+            p_big = 1
+        elif treatment == 'T2':
+            p_big = 0.9
+        else:
+            p_big = 0.8  
+        p_small = 1 - p_big
 
+        # creating normal df
+        for index, row in df.iterrows():
+            if row['type'] == 'Fake':
+                row['source'] = 'Source A'
+            else:
+                row['source'] = 'Source B'
+        
+        # changing source column according to treatment
+        to_change = df.loc[df.type == 'Fake','source'].sample(frac = p_small, random_state = 1234).index
+        df.loc[to_change, 'source'] = 'Source B'
+        to_change = df.loc[df.type == 'Reliable','source'].sample(frac = p_small, random_state = 1234).index
+        df.loc[to_change, 'source'] = 'Source A'
+
+        """
+        to check combinations of sources and types
+        for index, row in df.iterrows():
+            print(row['type'], "    ", row['source'])"""
 
 class Subsession(BaseSubsession):
     news_title = models.CharField()
