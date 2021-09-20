@@ -2,7 +2,7 @@ Downloaded from
 https://www.kaggle.com/clmentbisaillon/fake-and-real-news-dataset
 
 How to include images:
-- Put all the images in the images folder
+- Put all the images in the images folder in _static/mis_receiver
 - Name each screenshot of news you're using with their exact title reported in the news dataset
 - Switch the images setting on in the setting.py file, by putting:
 	images = True
