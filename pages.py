@@ -53,7 +53,10 @@ class Questions(Page):
         'source': row['source'],
         'round_number':self.round_number,
         # here I load the image with the same name as title, while also filtering for special symbols and spaces
-        'image_name': "mis_receiver/images/websites/{}.png".format(row['title'].strip(' ').translate({ ord(c): None for c in u"\":!\\|/*<>?" }))
+        # it chooses a different folder according to the specified setting in session config
+        'image_name': "mis_receiver/images/{folder}/{file_name}.png".format(
+            folder = 'facebook' if self.session.config['social'] else 'websites',
+            file_name = row['title'].strip(' ').translate({ ord(c): None for c in u"\":!\\|/*<>?" }))
         }
 
 class Results(Page):
