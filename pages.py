@@ -52,7 +52,8 @@ class Questions(Page):
         'type': row['type'],
         'source': row['source'],
         'round_number':self.round_number,
-        'image_name': "mis_receiver/images/websites/{}.png".format(row['title'].translate({ ord(c): None for c in u"\":!" }))
+        # here I load the image with the same name as title, while also filtering for special symbols and spaces
+        'image_name': "mis_receiver/images/websites/{}.png".format(row['title'].strip(' ').translate({ ord(c): None for c in u"\":!\\|/*<>?" }))
         }
 
 class Results(Page):
