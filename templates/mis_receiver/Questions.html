@@ -9,7 +9,8 @@
 
 {% if session.config.images %} <!-- Show image only if image is active in session config -->
     <center>
-        <img src = "{% static image_name %}" />
+        <img src = "{% static image_name %}" 
+             height="400"/>
     </center>
 {% endif %}
 
