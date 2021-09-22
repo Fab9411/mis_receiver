@@ -87,5 +87,6 @@ class Group(BaseGroup):
 
 class Player(BasePlayer):
     age = models.IntegerField(choices = range(18, 99, 1))
-    choices = models.CharField()
+    choices = models.StringField(choices = (('Fake', 'Fake'), ('Reliable', 'Reliable')),
+                                 label = 'This news is:')
     payoff_final = models.CurrencyField()
