@@ -2,10 +2,10 @@ Downloaded from
 https://www.kaggle.com/clmentbisaillon/fake-and-real-news-dataset
 
 How to include images:
-- Put all the images in the images folder in _static/mis_receiver
-- Name each screenshot of news you're using with their exact title reported in the news dataset
+- Put all the images in the images folder in _static/mis_receiver/images/websites
+- Name each screenshot of news you're using with their exact title reported in the news dataset (except for special symbols)
 - Switch the images setting on in the setting.py file, by putting:
 	images = True
 - If you want to have both screenshots from websites and Facebook, put the screenshots in the proper folders, again using the exact title reported in the news dataset. Then, turn social = True in the settings.py
 
-ATTENTION: If title contains some special symbol, you might need to delete it from both the file name and the title in the dataset
+ATTENTION: If title contains some special symbol that make it impossible to change the filename, delete them. The code will automatically match the title of the news article without watching at some specified symbols (\":!\\|/*<>?, but you can also change them).
