@@ -15,6 +15,7 @@ The standard setting is on 10 rounds, with 5 reliable news and 5 fake news, but 
 
 ## How to make it work
 ### Dataset
+In the demo, the dataset is downloaded by Kaggle (https://www.kaggle.com/clmentbisaillon/fake-and-real-news-dataset). In order to use your own data, follow this procedure after having deleted the demo dataset:
 1. First thing you should do is having a dataset of reliable news (called "true_df") and a dataset of fake news (called "fake_df"), both of them needs to be in csv. Column names must be "title" and "text".
 2. Put those two datasets in the data folder of the oTree experiment.
 
